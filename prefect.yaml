@@ -1,0 +1,34 @@
+# Welcome to your prefect.yaml file! You can use this file for storing and managing
+# configuration for deploying your flows. We recommend committing this file to source
+# control along with your flow code.
+
+# Generic metadata about this project
+name: prefect-modal-test
+prefect-version: 3.6.1
+
+# build section allows you to manage and build docker images
+build: null
+
+# push section allows you to manage if and how this project is uploaded to remote locations
+push: null
+
+# pull section allows you to provide instructions for cloning this project in remote locations
+pull:
+- prefect.deployments.steps.git_clone:
+    repository: https://github.com/Minsu-Daniel-Kim/prefect-modal-test
+    branch: main
+
+# the deployments section allows you to provide configuration for deploying flows
+deployments:
+- name: modal-test
+  version: null
+  tags: ["test", "modal", "hello-world"]
+  description: "Simple Hello World flow to test Prefect + Modal integration"
+  schedules: []
+  flow_name: null
+  entrypoint: flows/hello_world.py:hello_world_flow
+  parameters: {}
+  work_pool:
+    name: modal-test-pool
+    work_queue_name: default
+    job_variables: {}
